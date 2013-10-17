@@ -5,3 +5,13 @@ h1 FA-SHUN FOYTS
   - @contests.each do |contest|
     .contest
       h3 = link_to contest.title, contest
+/ .panel
+/   h3 Create a New Contest!
+/   form.new-contest
+/     label Contest Name
+/       input name="Contest Name" type="text"
+/     label Choose Your Contenders
+/       input name="Contender 1" type="file"
+/       input name="Contender 2" type="file"
+/       input type="submit" value="Vote and Comment!"
+
