@@ -1,4 +1,6 @@
 class ContestsController < ApplicationController
+  before_filter :authenticate_user!, only: [:comment, :destroy_comment]
+
   def index
     @contests = Contest.all
   end
@@ -10,6 +12,9 @@ class ContestsController < ApplicationController
   def comment
     @contest = Contest.find(params[:id])
     new_comment = @contest.comments.create(comment_params)
+    new_comment.user_id = current_user.id
+    new_comment.save!
+
     render :json => new_comment.to_json, :status => 200
   end
 
@@ -19,7 +24,7 @@ class ContestsController < ApplicationController
       :contest_id => params[:contest_id]
     ).first
 
-    # TODO: Destroy the comment
+    @comment.destroy if @comment.user_id == current_user.id
 
     render :nothing => true, :status => 200
   end

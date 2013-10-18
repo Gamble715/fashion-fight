@@ -4,7 +4,7 @@
     initialize: function (options) {
       this.modelViews = {};
       this.listenTo(this.collection, 'add', this.addCommentToWall);
-      // TODO: Listen for a remove event
+      this.listenTo(this.collection, 'remove', this.removeCommentFromWall);
     },
 
     addCommentToWall: function (comment) {
@@ -16,8 +16,10 @@
     },
 
     removeCommentFromWall: function (comment) {
-      // TODO: Grab the comment's view using its local id
+      // Grab the comment's view using its local id
+      var commentView = this.modelViews[comment.cid];
       // TODO: Remove the view from the page
+      commentView.remove();
     }
   });
 

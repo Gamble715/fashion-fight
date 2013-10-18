@@ -1,6 +1,11 @@
 (function () {
 
   window.CommentInputView = Backbone.View.extend({
+    initialize: function() {
+      if (g.user) {
+        $(this.el).show();
+      }
+    },
     events: {
       'submit': 'createComment'
     },
